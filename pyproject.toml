@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "faq-django"
+version = "0.1.0"
+description = "I don't know what to write here, let's have a test version of the Django FAQ"
+authors = ["Anton Kalchenko  <anton11042002@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "faq_django"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
