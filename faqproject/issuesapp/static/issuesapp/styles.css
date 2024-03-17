@@ -1,0 +1,16 @@
+.container-left {
+  margin-left: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card {
+  position: relative;
+}
+.card > a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

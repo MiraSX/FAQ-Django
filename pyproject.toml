@@ -10,6 +10,8 @@ packages = [{include = "faq_django"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^5.0.2"
+psycopg2 = "^2.9.9"
+django-browser-reload = "^1.12.1"
 
 
 [build-system]
