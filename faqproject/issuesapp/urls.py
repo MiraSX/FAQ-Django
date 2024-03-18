@@ -7,4 +7,9 @@ app_name = "issuesapp"
 
 urlpatterns = [
     path("", views.main, name="main"),
+    path(
+        "create/",
+        views.create_issue,
+        name="create",
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
