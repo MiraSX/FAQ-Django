@@ -1,1 +1,11 @@
-
+{% extends "issuesapp/base.html" %} {% block content %} {% for issue in issues %}
+<div class="container mt-3 ms-5">
+  <div class="card">
+    <a href="#" class="card-link"></a>
+    <div class="card-body">
+      <h5 class="card-title">{{issue.title}}</h5>
+      <p class="card-text">{{issue.description}}</p>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock content %}

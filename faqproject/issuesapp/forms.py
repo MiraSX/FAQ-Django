@@ -7,6 +7,7 @@ class IssueForm(ModelForm):
     title = CharField(
         max_length=50,
         min_length=5,
+        required=True,
         widget=TextInput(
             attrs={"class": "form-control", "placeholder": "Sort name issue"}
         ),
@@ -14,6 +15,7 @@ class IssueForm(ModelForm):
     description = CharField(
         max_length=200,
         min_length=10,
+        required=True,
         widget=TextInput(
             attrs={
                 "class": "form-control",
@@ -22,7 +24,9 @@ class IssueForm(ModelForm):
             }
         ),
     )
-    image = ImageField(widget=FileInput(attrs={"class": "form-control"}))
+    image = ImageField(
+        required=False, widget=FileInput(attrs={"class": "form-control"})
+    )
 
     class Meta:
         model = Issue
