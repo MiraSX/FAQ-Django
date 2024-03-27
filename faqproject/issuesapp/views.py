@@ -6,14 +6,12 @@ from .forms import IssueForm
 
 
 # Create your views here.
-def main(request):
-    return render(request, "issuesapp/base.html", context={"title": "Main"})
 
 
 def issues(request):
     issues = Issue.objects.all()
     return render(
-        request, "issuesapp/issues.html", context={"title": "Issues", "issues": issues}
+        request, "issuesapp/main.html", context={"title": "Issues", "issues": issues}
     )
 
 
@@ -23,7 +21,30 @@ def create_issue(request):
         form = IssueForm(request.POST, request.FILES, instance=Issue())
         if form.is_valid():
             form.save()
-            return redirect(to="issuesapp:main")
+            return redirect(to="issuesapp:issues")
         return render(request, "issuesapp/create.html", context={"form": form})
 
     return render(request, "issuesapp/create.html", context={"form": IssueForm()})
+
+
+def edit_issue(request, issue_id):
+    issue = Issue.objects.get(id=issue_id)
+    form = IssueForm(instance=issue)
+    if request.method == "POST":
+        form = IssueForm(request.POST, request.FILES, instance=issue)
+        if form.is_valid():
+            form.save()
+            return redirect(to="issuesapp:issues")
+        return render(
+            request, "issuesapp/edit_card.html", context={"form": form, "issue": issue}
+        )
+
+    return render(
+        request, "issuesapp/edit.html", context={"form": form, "issue": issue}
+    )
+
+
+def delete_issue(request, issue_id):
+    issue = Issue.objects.get(id=issue_id)
+    issue.delete()
+    return redirect(to="issuesapp:issues")
