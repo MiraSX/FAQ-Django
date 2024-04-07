@@ -1,1 +1,14 @@
-{% extends "issuesapp/base.html" %}{% block content %} {% endblock content %}
+{% extends "issuesapp/base.html" %}{% block content %}
+
+<div class="container">
+  <h1>{{issue.title}}</h1>
+  <p>{{issue.description}}</p>
+  <p>{{issue.status}}</p>
+  <p>Created: {{issue.created_at}}</p>
+  <img src="{{issue.image.url}}" alt=""   width="400"/>
+</div>
+<div class="container mb-3 mt-3 ms-2">
+    <a href="{% url "issuesapp:edit" issue.id %}" class="btn btn-info">Change description</a>
+    <a href="{% url "issuesapp:delete" issue.id %}" class="btn btn-danger">Delete</a>
+</div>
+{% endblock content %}

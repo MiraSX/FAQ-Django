@@ -1,5 +1,5 @@
 {% extends "issuesapp/base.html" %} {% block content %}
-<form action="{%url 'issuesapp:edit'%}" method="post" enctype="multipart/form-data">
+<form action="{%url 'issuesapp:edit' issue.id %}" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="container">
     {%if form.error and form.non_field_errors%}
@@ -7,10 +7,12 @@
     {%endif%}
   </div>
   <div class="container mb-3 mt-3 ms-2">
-    {{}} {{form.title}}
+    {{issue.title}} {{form.title}}
     <span>{{form.error.title}}</span>
   </div>
-  <div class="container mb-3 mt-3 ms-2">{{ form.description}}<span>{{form.error.description}}</span></div>
+  <div class="container mb-3 mt-3 ms-2">
+    {{issue.description}} {{ form.description}}
+    <span>{{form.error.description}}</span></div>
   <div class="container mb-3 mt-3 ms-2">{{ form.image}}<span>{{form.error.image}}</span></div>
   <div class="container mb-3 mt-3 ms-2">
     <button type="submit" class="btn btn-success">Send</button>

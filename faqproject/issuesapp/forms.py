@@ -1,11 +1,18 @@
-from django.forms import ModelForm, CharField, TextInput, FileInput, ImageField
+from django.forms import (
+    ModelForm,
+    CharField,
+    TextInput,
+    FileInput,
+    ImageField,
+    Textarea,
+)
 
 from .models import Issue
 
 
 class IssueForm(ModelForm):
     title = CharField(
-        max_length=50,
+        max_length=100,
         min_length=5,
         required=True,
         widget=TextInput(
@@ -13,13 +20,13 @@ class IssueForm(ModelForm):
         ),
     )
     description = CharField(
-        max_length=200,
         min_length=10,
         required=True,
-        widget=TextInput(
+        widget=Textarea(
             attrs={
                 "class": "form-control",
                 "placeholder": "Description",
+                "cols": "40",
                 "style": "min-height: 300px",
             }
         ),

@@ -21,10 +21,15 @@ def create_issue(request):
         form = IssueForm(request.POST, request.FILES, instance=Issue())
         if form.is_valid():
             form.save()
-            return redirect(to="issuesapp:issues")
+            return redirect(to="issuesapp:main")
         return render(request, "issuesapp/create.html", context={"form": form})
 
     return render(request, "issuesapp/create.html", context={"form": IssueForm()})
+
+
+def show_issue(request, issue_id):
+    issue = Issue.objects.get(id=issue_id)
+    return render(request, "issuesapp/issue.html", context={"issue": issue})
 
 
 def edit_issue(request, issue_id):
@@ -34,17 +39,17 @@ def edit_issue(request, issue_id):
         form = IssueForm(request.POST, request.FILES, instance=issue)
         if form.is_valid():
             form.save()
-            return redirect(to="issuesapp:issues")
+            return redirect(to="issuesapp:main")
         return render(
-            request, "issuesapp/edit_card.html", context={"form": form, "issue": issue}
+            request, "issuesapp/edit_issue.html", context={"form": form, "issue": issue}
         )
 
     return render(
-        request, "issuesapp/edit.html", context={"form": form, "issue": issue}
+        request, "issuesapp/edit_issue.html", context={"form": form, "issue": issue}
     )
 
 
 def delete_issue(request, issue_id):
     issue = Issue.objects.get(id=issue_id)
     issue.delete()
-    return redirect(to="issuesapp:issues")
+    return redirect(to="issuesapp:main")

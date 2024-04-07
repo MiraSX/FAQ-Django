@@ -12,4 +12,19 @@ urlpatterns = [
         views.create_issue,
         name="create",
     ),
+    path(
+        "issue/<int:issue_id>",
+        views.show_issue,
+        name="issue",
+    ),
+    path(
+        "edit/<int:issue_id>",
+        views.edit_issue,
+        name="edit",
+    ),
+    path(
+        "delete/<int:issue_id>",
+        views.delete_issue,
+        name="delete",
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
