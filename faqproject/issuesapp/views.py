@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from .models import Issue
+from .models import Issue, Tag
 
 from .forms import IssueForm
 
@@ -16,15 +16,30 @@ def issues(request):
 
 
 def create_issue(request):
-    form = IssueForm()
     if request.method == "POST":
         form = IssueForm(request.POST, request.FILES, instance=Issue())
-        if form.is_valid():
-            form.save()
-            return redirect(to="issuesapp:main")
-        return render(request, "issuesapp/create.html", context={"form": form})
 
-    return render(request, "issuesapp/create.html", context={"form": IssueForm()})
+        if form.is_valid():
+            issue = form.save(commit=False)
+            id_tags = form.cleaned_data["tags"]
+            for id_tag in id_tags:
+                tag = Tag.objects.get(id=id_tag)
+                issue.tag = tag
+            issue.save()
+
+            return redirect(to="issuesapp:main")
+        return render(
+            request,
+            "issuesapp/create.html",
+            context={
+                "form": form,
+            },
+        )
+    return render(
+        request,
+        "issuesapp/create.html",
+        context={"form": IssueForm()},
+    )
 
 
 def show_issue(request, issue_id):
